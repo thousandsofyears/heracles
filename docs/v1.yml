@@ -1,0 +1,283 @@
+swagger: '2.0'
+info:
+  title: Heracles API
+  description: Move your app forward with the Uber API
+  version: 1.0.0
+host: api.wishstone.in
+schemes:
+  - http
+basePath: /heracles/v1
+produces:
+  - application/json
+paths:
+  /blogs:
+    get:
+      summary: blog list
+      description: To get blog list
+      parameters:
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+      tags:
+        - blog
+      responses:
+        '200':
+          description: blogs list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Blog'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: create blog
+      description: create blog
+      parameters:
+          - name: blog
+            in: body
+            schema:
+              $ref: '#/definitions/Blog'
+            required: true
+      tags:
+        - blog
+      responses:
+        '201':
+          description: blog detail
+          schema:
+            $ref: '#/definitions/Blog'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /blog/{blog_id}:
+    parameters:
+      - name: blog_id
+        in: path
+        required: true
+        type: int
+    get:
+      responses:
+        200:
+          description: blog info
+          schema:
+            $ref: '#/definitions/Blog'
+    delete:
+      responses:
+        200:
+          description: delete blog
+    put:
+      parameters:
+        - name: blog
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Blog'
+      responses:
+        201:
+          description: update blog
+  /tags:
+    get:
+      summary: tag list
+      description: To get tag list
+      parameters:
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+      tags:
+        - tag
+      responses:
+        '200':
+          description: tags list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: create tag
+      description: create tag
+      parameters:
+          - name: tag
+            in: body
+            schema:
+              $ref: '#/definitions/Tag'
+            required: true
+      tags:
+        - tag
+      responses:
+        '201':
+          description: tag detail
+          schema:
+            $ref: '#/definitions/Tag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /tag/{tag_id}:
+    parameters:
+      - name: tag_id
+        in: path
+        required: true
+        type: int
+    get:
+      responses:
+        200:
+          description: tag info
+          schema:
+            $ref: '#/definitions/Tag'
+    delete:
+      responses:
+        200:
+          description: delete tag
+    put:
+      parameters:
+        - name: tag
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        201:
+          description: update tag
+  /categorys:
+    get:
+      summary: category list
+      description: To get category list
+      parameters:
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/page'
+      categorys:
+        - category
+      responses:
+        '200':
+          description: categorys list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: create category
+      description: create category
+      parameters:
+          - name: category
+            in: body
+            schema:
+              $ref: '#/definitions/Category'
+            required: true
+      categorys:
+        - category
+      responses:
+        '201':
+          description: category detail
+          schema:
+            $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /category/{category_id}:
+    parameters:
+      - name: category_id
+        in: path
+        required: true
+        type: int
+    get:
+      responses:
+        200:
+          description: category info
+          schema:
+            $ref: '#/definitions/Category'
+    delete:
+      responses:
+        200:
+          description: delete category
+    put:
+      parameters:
+        - name: category
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        201:
+          description: update category
+definitions:
+  Blog:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      summary:
+        type: string
+      category_id:
+        type: integer
+      is_published:
+        type: boolean
+      date_created:
+        type: string
+        format: date-time
+      date_modified:
+        type: string
+        format: date-time
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      summary:
+        type: string
+      date_created:
+        type: string
+        format: date-time
+  Tag:
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      summary:
+        type: string
+      date_created:
+        type: string
+        format: date-time
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+parameters:
+  limit:
+    name: limit
+    in: query
+    description: max records to return
+    default: 20
+    type: integer
+    format: int32
+    maximum: 1000 
+    minimum: 1
+  page:
+    name: page 
+    in: query
+    description: page number
+    default: 1
+    type: integer
+    format: int32
+    maximum: 1000 
+    minimum: 0

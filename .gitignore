@@ -1,0 +1,21 @@
+*.py[co]
+build/
+dist/
+*.so
+*.sw[po]
+.DS_Store
+*.egg-info
+*.egg
+.idea
+.coverage
+dump.rdb
+req.py
+celery*
+tests/.cache
+*.orig
+
+# CTags
+tags
+
+.vscode
+.cache

@@ -1,0 +1,13 @@
+Jinja2==2.8
+MarkupSafe==0.23
+PyYAML==3.11
+click==6.2
+dpath==1.4.0
+swagger-py-codegen==0.1.13
+wsgiref==0.1.2
+Flask==0.11.1
+Flask-Script==2.0.5
+pytz==2016.4
+Flask-RESTful==0.3.5
+jsonschema==2.5.1
+functools32==3.2.3-2
