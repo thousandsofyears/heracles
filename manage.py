@@ -29,5 +29,14 @@ def test():
     return code
 
 
+@manager.command
+def swagger():
+    """Run the tests."""
+    import subprocess
+    code = subprocess.call([
+        'swagger_py_codegen', '-s', 'docs/v1.yml', '-p', 'heracles', '../heracles'])
+    return code
+
+
 if __name__ == '__main__':
     manager.run()
